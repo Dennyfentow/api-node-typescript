@@ -1,10 +1,9 @@
-import express from "express";
-import indexRoutes from './routes/index';
-import bodyParser from 'body-parser';
+import logger from './logger';
+import server from './server';
 
+const PORT: number = parseInt(process.env.PORT as string, 10) || 3355;
 
-const app = express();
-app.use(bodyParser.json());
-app.use(indexRoutes);
-
-app.listen(3000);
+server.listen(PORT, () => {
+    logger.info('..:: api-node-typescript ::..\n');
+    logger.info('escutando na porta: ' + PORT);
+});
