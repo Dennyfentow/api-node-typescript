@@ -18,7 +18,7 @@ const pool = new Pool({
     // statement_timeout: 15000,
 });
 pool.on('error', (err, client) => {
-    logger.error('Erro no banco de dados: ');
+    logger.error('database error: ');
     logger.error(err);
     console.log(err);
     logger.error(err.message);

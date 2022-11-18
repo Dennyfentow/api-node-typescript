@@ -16,7 +16,7 @@ const authLogin = async (req: Req, res: Res) => {
     let userInfo: UserInfo| null = null;
     if (user && user.username && user.password) {
       user.username = user.username.toLowerCase();
-      logger.info('buscando usuário: ' + user.username);
+      logger.info('search user: ' + user.username);
       userInfo = await getUser(user);
     }
 
@@ -29,13 +29,13 @@ const authLogin = async (req: Req, res: Res) => {
         });
         res.status(201).json(new AuthResponse(true, token, updatedUserInfo));
       } else {
-        logger.error('Não possível atualizar o secret do usuário: ');
+        logger.error('Unable to update user secret: ');
         logger.error(userInfo);
         res.status(401).json(new AuthResponse(false));
       }
 
     } else {
-      logger.info('login não autorizado: ');
+      logger.info('unauthorized login: ');
       logger.error(user);
       getInfoRequest(req);
       res.status(401).json(new AuthResponse(false));
@@ -47,7 +47,7 @@ const authLogin = async (req: Req, res: Res) => {
       logger.error(e);
       res.status(408).json(new AuthResponse(false));
     } else if (e instanceof UnauthorizedException) {
-      logger.info('Usuário não autorizado: ' + user.username);
+      logger.info('unauthorized user: ' + user.username);
       getInfoRequest(req);
       res.status(401).json(new AuthResponse(false));
     } else {

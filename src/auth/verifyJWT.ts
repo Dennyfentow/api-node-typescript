@@ -12,7 +12,7 @@ export function verificarJWT(req: Req, res: Res, next: Next) {
 
     jwt.verify(token, process.env.SECRET as string, function (err: any, decoded: any) {
         if (err) {
-            logger.error('Falha na authenticação do token url: \'' + req.url + '\' ip: \'' + req.ip + '\'');
+            logger.error('Url token authentication failed: \'' + req.url + '\' ip: \'' + req.ip + '\'');
             return res.status(401).json({ auth: false, message: 'Failed to authenticate token.' })
         }
 

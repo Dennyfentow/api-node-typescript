@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // TODO: implementar a utilização do JWT futuramente
 const getUser = async (user: BaseUser): Promise<UserInfo | null> => {
-    const sql = `<CONSULTA GET USER>`;
+    const sql = `<SQL QUERY GET USER>`;
 
     const params: any[] = [user.username, user.password];
     try {
@@ -17,12 +17,12 @@ const getUser = async (user: BaseUser): Promise<UserInfo | null> => {
         const usersInfo = queryResult.rows as UserInfo[];
         if (usersInfo.length > 0 && usersInfo[0]) {
             const userInfo = usersInfo[0];
-            logger.info('usuario logado: ');
+            logger.info('logged in user: ');
             logger.info(usersInfo[0]);
             return userInfo;
         }
     } catch (e: any) {
-        logger.error('Erro ao buscar o usuário: ' + e.message);
+        logger.error('Error fetching user: ' + e.message);
         logger.error({ e });
         console.error(e);
     }
@@ -32,7 +32,7 @@ const getUser = async (user: BaseUser): Promise<UserInfo | null> => {
 }
 
 const updateSecretUser = async (userInfoUpdate: UserInfo): Promise<UserInfo | null> => {
-    const sql = `<CONSULTA UPDATE SECRET>`;
+    const sql = `<SQL QUERY UPDATE SECRET>`;
     const secret: string = uuidv4();
     const params: any[] = [secret, userInfoUpdate.id]
     try {
@@ -41,7 +41,7 @@ const updateSecretUser = async (userInfoUpdate: UserInfo): Promise<UserInfo | nu
         userInfoUpdate.secret = secret;
         return userInfoUpdate;
     } catch (e: any) {
-        logger.error('Erro na atualização do secret: ' + e.message);
+        logger.error('Secret update error: ' + e.message);
         logger.error({ e });
         console.error(e);
         return null;
@@ -51,13 +51,13 @@ const updateSecretUser = async (userInfoUpdate: UserInfo): Promise<UserInfo | nu
 };
 
 const dropSecretUser = async (id: number): Promise<boolean> => {
-    const sql = `<CONSULTA DROP SECRECT USER>`;
+    const sql = `<SQL DROP SECRECT USER>`;
     const params: any[] = [id];
     try {
         await runQuery(sql, params);
         return true;
     } catch (e: any) {
-        logger.error('Erro na remoção do secret: ' + e.message);
+        logger.error('Secret removal error: ' + e.message);
         logger.error({ e });
         console.error(e);
         return false;

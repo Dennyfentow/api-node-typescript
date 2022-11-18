@@ -5,7 +5,7 @@ const { combine, timestamp: timestampImport, label: labelImport, printf, errors,
 const myFormat = combine(
     colorize(),
     timestampImport({ format: 'DD-MM-YYYY HH:mm:ss' }),
-    labelImport({ label: 'api-node-typescript' }),
+    labelImport({ label: 'node-api-jornadas' }),
     errors({ stack: true }),
     printf(({ level, timestamp, label, message, stack, }) => {
         const result: string = message ? JSON.stringify(message) : "";

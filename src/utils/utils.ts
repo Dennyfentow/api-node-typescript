@@ -6,7 +6,7 @@ export function getInfoRequest(req: Req): void {
     logger.info(req.headers);
 }
 
-export const formatarData = (dataHoraAPI: Date) => {
+export const formatData = (dataHoraAPI: Date) => {
     try {
         // "2022-01-01T03:00:00.000Z";
         dataHoraAPI.setHours(dataHoraAPI.getHours() -3);

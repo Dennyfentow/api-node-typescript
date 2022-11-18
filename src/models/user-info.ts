@@ -1,16 +1,16 @@
 export class UserInfo {
     private _id: number;
-    private _usuario: string;
-    private _nome_completo: string;
-    private _tipo_usuario: string;
+    private _user: string;
+    private _full_name: string;
+    private _user_type: string;
     private _secret: string;
 
-    constructor(id: number, usuario: string, nome_completo: string, tipo_usuario: string,
+    constructor(id: number, user: string, full_name: string, user_type: string,
         secret: string) {
         this._id = id;
-        this._usuario = usuario;
-        this._nome_completo = nome_completo;
-        this._tipo_usuario = tipo_usuario;
+        this._user = user;
+        this._full_name = full_name;
+        this._user_type = user_type;
         this._secret = secret;
     }
 
@@ -18,25 +18,25 @@ export class UserInfo {
         return this._id;
     }
 
-    public get usuario(): string {
-        return this._usuario;
+    public get user(): string {
+        return this._user;
     }
-    public set usuario(value: string) {
-        this._usuario = value;
-    }
-
-    public get nome_completo(): string {
-        return this._nome_completo;
-    }
-    public set nome_completo(value: string) {
-        this._nome_completo = value;
+    public set user(value: string) {
+        this._user = value;
     }
 
-    public get tipo_usuario(): string {
-        return this._tipo_usuario;
+    public get full_name(): string {
+        return this._full_name;
     }
-    public set tipo_usuario(value: string) {
-        this._tipo_usuario = value;
+    public set full_name(value: string) {
+        this._full_name = value;
+    }
+
+    public get user_type(): string {
+        return this._user_type;
+    }
+    public set user_type(value: string) {
+        this._user_type = value;
     }
 
     public get secret(): string {
@@ -47,6 +47,6 @@ export class UserInfo {
     }
 
     toString() {
-        return `UserInfo{usuario: ${this.usuario}, nome_completo: ${this.nome_completo}, tipo_usuario: ${this.tipo_usuario}`;
+        return `UserInfo{user: ${this.user}, full_name: ${this.full_name}, user_type: ${this.user_type}`;
     }
 }

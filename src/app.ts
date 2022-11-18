@@ -5,5 +5,5 @@ const PORT: number = parseInt(process.env.PORT as string, 10) || 3355;
 
 server.listen(PORT, () => {
     logger.info('..:: api-node-typescript ::..\n');
-    logger.info('escutando na porta: ' + PORT);
+    logger.info('listening on port: ' + PORT);
 });
