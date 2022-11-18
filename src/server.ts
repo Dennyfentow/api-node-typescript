@@ -10,7 +10,7 @@ import { getInfoRequest } from "./utils/utils";
 
 
 if (!process.env.PORT) {
-    logger.error('Sem a variavel de ambiente PORT');
+    logger.error('No PORT environment variable');
     process.exit(1);
 }
 
@@ -23,13 +23,13 @@ server.use(express.json());
 server.use(routers);
 //Tratando error de rota
 server.use((req, res) => {
-    logger.error("rota não encontrada: ");
+    logger.error("route not found: ");
     getInfoRequest(req);
     res.status(404).json({ error: true });
 });
 
 server.use((error: any, req: Req, res: Res, next: Next) => {
-    logger.error('Erro middleware, algum parâmetro errado no get');
+    logger.error('Middleware error, some wrong parameter in get');
     logger.error("url: '" + req.url + "' IP: '" + req.ip + "' headers: ");
     logger.error(req.headers);
     res.status(500).json({ error: true });
