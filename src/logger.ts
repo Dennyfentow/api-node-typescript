@@ -1,19 +1,30 @@
 //logger.js
+import * as dotenv from "dotenv";
+dotenv.config();
 import { createLogger, format, transports } from 'winston';
 const { combine, timestamp: timestampImport, label: labelImport, printf, errors, colorize, prettyPrint } = format;
+
+const label = process.env.NAME_API || 'api-node-typescript';
 
 const myFormat = combine(
     colorize(),
     timestampImport({ format: 'DD-MM-YYYY HH:mm:ss' }),
-    labelImport({ label: 'node-api-jornadas' }),
+    labelImport({ label }),
     errors({ stack: true }),
-    printf(({ level, timestamp, label, message, stack, }) => {
-        const result: string = message ? JSON.stringify(message) : "";
+    printf(({ level, timestamp, label, message, stack, ...meta }) => {
+        message = message ? JSON.stringify(message, null, 2) : "";
+
+        let result = `${timestamp} [${label}] level: ${level} - message: ${message}`;
+
         if (stack) {
-            return `${timestamp} [${label}] level: ${level} - error: ${result} - stack: ${stack} \n`;
-        } else {
-            return `${timestamp} [${label}] level: ${level} - ${result} \n`;
+            result += ' - stack: ' + stack;
         }
+
+        if (Object.keys(meta).length > 0) {
+            result += ' - meta: ' + JSON.stringify(meta, null, 2);
+        }
+
+        return result;
     }));
 
 const logger = createLogger({

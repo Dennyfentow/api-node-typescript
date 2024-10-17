@@ -13,9 +13,10 @@ export const limiter = rateLimit({
 
     // skip: (request, _) => allowlist.some(someIp => someIp == request.ip),
     handler: function (req: Req, res: Res) {
-        if (!ipToManyRequests.has(req.ip)) {
-            ipToManyRequests.set(req.ip, req.ip);
-            logger.error('to many requests: ' + req.ip);
+        const reqIp = req.ip || 'não identificado';
+        if (!ipToManyRequests.has(reqIp)) {
+            ipToManyRequests.set(reqIp, reqIp);
+            logger.error('to many requests: ' + reqIp);
         }
         res.status(409).send('Too many requests');
     }
