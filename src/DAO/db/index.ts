@@ -27,7 +27,7 @@ pool.on('error', (err, client) => {
     logger.error(client);
 });
 
-const runQuery = (text: string, params: any[]) => pool.query(text, params);
+const runQuery = (text: string, params: unknown[]) => pool.query(text, params);
 export { 
     pool,
     runQuery

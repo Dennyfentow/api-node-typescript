@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 const getUser = async (user: BaseUser): Promise<UserInfo | null> => {
     const sql = `<SQL QUERY GET USER>`;
 
-    const params: any[] = [user.username, user.password];
+    const params: unknown[] = [user.username, user.password];
     try {
         const queryResult = await runQuery(sql, params);
 
@@ -21,8 +21,8 @@ const getUser = async (user: BaseUser): Promise<UserInfo | null> => {
             logger.info(usersInfo[0]);
             return userInfo;
         }
-    } catch (e: any) {
-        logger.error('Error fetching user: ' + e.message);
+    } catch (e) {
+        logger.error('Error fetching user: ', e);
         logger.error({ e });
         console.error(e);
     }
@@ -34,14 +34,14 @@ const getUser = async (user: BaseUser): Promise<UserInfo | null> => {
 const updateSecretUser = async (userInfoUpdate: UserInfo): Promise<UserInfo | null> => {
     const sql = `<SQL QUERY UPDATE SECRET>`;
     const secret: string = uuidv4();
-    const params: any[] = [secret, userInfoUpdate.id]
+    const params: unknown[] = [secret, userInfoUpdate.id]
     try {
 
         await runQuery(sql, params);
         userInfoUpdate.secret = secret;
         return userInfoUpdate;
-    } catch (e: any) {
-        logger.error('Secret update error: ' + e.message);
+    } catch (e: unknown) {
+        logger.error('Secret update error: ', e);
         logger.error({ e });
         console.error(e);
         return null;
@@ -52,12 +52,12 @@ const updateSecretUser = async (userInfoUpdate: UserInfo): Promise<UserInfo | nu
 
 const dropSecretUser = async (id: number): Promise<boolean> => {
     const sql = `<SQL DROP SECRECT USER>`;
-    const params: any[] = [id];
+    const params: unknown[] = [id];
     try {
         await runQuery(sql, params);
         return true;
-    } catch (e: any) {
-        logger.error('Secret removal error: ' + e.message);
+    } catch (e: unknown) {
+        logger.error('Secret removal error: ', e);
         logger.error({ e });
         console.error(e);
         return false;

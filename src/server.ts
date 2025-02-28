@@ -3,7 +3,7 @@ dotenv.config();
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
-import { Next, Req, Res } from "./types/types";
+import { Req, Res } from "./types/types";
 import logger from "./logger";
 import routers from "./routes/route";
 import { getInfoRequest } from "./utils/utils";
@@ -30,7 +30,10 @@ server.use((req, res) => {
     res.status(404).json({ error: true });
 });
 
-server.use((error: any, req: Req, res: Res, next: Next) => {
+server.use((error: unknown, req: Req, res: Res) => {
+    if(error) {
+        logger.error('Middleware error, some wrong parameter in get', error);
+    }
     logger.error('Middleware error, some wrong parameter in get');
     logger.error("url: '" + req.url + "' IP: '" + req.ip + "' headers: ");
     logger.error(req.headers);

@@ -11,7 +11,7 @@ export function verificarJWT(req: Req, res: Res, next: Next): void {
     }
     const token = req.headers['x-access-token'] as string;
 
-    jwt.verify(token, process.env.SECRET as string, function (err: any, decoded: any) {
+    jwt.verify(token, process.env.SECRET as string, function (err: jwt.VerifyErrors | null, decoded: unknown) {
         if (err) {
             logger.error('Url token authentication failed: \'' + req.url + '\' ip: \'' + req.ip + '\'');
             res.status(401).json({ auth: false, message: 'Failed to authenticate token.' });
