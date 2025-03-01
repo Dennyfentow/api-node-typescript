@@ -59,7 +59,7 @@ const authLogin = async (req: Req, res: Res) => {
   }
 };
 
-const authLogout = async (req: Req, res: Res) => {
+const authLogout = async (_: Req, res: Res) => {
   const userInfo: UserInfo = res.locals.userInfo;
   userInfo.secret = '';
   const result = await dropSecretUser(userInfo.id)
