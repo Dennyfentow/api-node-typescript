@@ -1,0 +1,43 @@
+{
+  "name": "api-node-typescript",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc ; node ./dist/app",
+    "dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .ts src",
+    "lint:fix": "eslint --ext .ts src --fix"
+  },
+  "author": "Daniel dos Santos",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.14.0",
+    "pg": "^8.13.3",
+    "uuid": "^11.1.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.7",
+    "@types/pg": "^8.11.11",
+    "@types/uuid": "^10.0.0",
+    "eslint": "^9.21.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "5.7.3",
+    "typescript-eslint": "^8.25.0"
+  }
+}
