@@ -8,9 +8,9 @@ export function getInfoRequest(req: Req): void {
 
 export const formatData = (dataHoraAPI: Date) => {
     try {
-        // "2022-01-01T03:00:00.000Z";
-        dataHoraAPI.setHours(dataHoraAPI.getHours() -3);
-        const dataIsoString = dataHoraAPI.toISOString();        
+        // Ajuste em UTC para reduzir fragilidade por timezone
+        dataHoraAPI.setUTCHours(dataHoraAPI.getUTCHours() - 3);
+        const dataIsoString = dataHoraAPI.toISOString();
         return dataIsoString.substring(0,10) + ' ' + dataIsoString.substring(11,19);
     } catch (err) {
         logger.error(err);
