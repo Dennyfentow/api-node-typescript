@@ -3,17 +3,13 @@ dotenv.config();
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
-import { Req, Res } from "./types/types";
+import { Req, Res, Next } from "./types/types";
 import logger from "./logger";
 import routers from "./routes/route";
 import { getInfoRequest } from "./utils/utils";
 import { limiter } from "./limiter";
 
-if (!process.env.PORT) {
-    logger.error('No PORT environment variable');
-    process.exit(1);
-}
-
+// Removido o encerramento do processo em caso de PORT ausente; o arquivo app.ts lida com a porta
 
 const server = express();
 server.use(cors());
@@ -26,12 +22,13 @@ server.use(routers);
 //Tratando error de rota
 server.use((req, res) => {
     logger.error("route not found: ");
-    getInfoRequest(req);
+    getInfoRequest(req as Req);
     res.status(404).json({ error: true });
 });
 
-server.use((error: unknown, req: Req, res: Res) => {
-    if(error) {
+// Middleware de erro com 4 argumentos conforme Express
+server.use((error: unknown, req: Req, res: Res, _next: Next) => {
+    if (error) {
         logger.error('Middleware error, some wrong parameter in get', error);
     }
     logger.error('Middleware error, some wrong parameter in get');
